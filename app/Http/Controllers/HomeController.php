@@ -72,22 +72,47 @@ class HomeController extends Controller
     function user_photo_update(Request $request){
         // print_r($request->photo);
         $request->validate([
+             // 'photo'=> 'required | mimes:jpg,png',
             'photo'=> 'required | image',
-            // 'photo'=> 'required | mimes:jpg,png',
+            // 'photo'=> 'file | max:512',
+            // 'photo'=> 'dimensions:min_width=100,min_height=100',
+
 
         ]);
-        $photo = $request->photo;
-        $extension = $photo->extension();
-        // echo $extension;
-        $file_name = Auth::id().'.'.$extension;
-        // echo $file_name;
 
-        $image = Image::make($photo)->resize(300, 200)->save(public_path('uploads/user/'.$file_name));
+        if (Auth::user()->photo == null) {
+            $photo = $request->photo;
+            $extension = $photo->extension();
+            // echo $extension;
+            $file_name = Auth::id().'.'.$extension;
+            // echo $file_name;
 
-        User::find(Auth::id())->update([
-            'photo'=>$file_name,
+            $image = Image::make($photo)->resize(300, 200)->save(public_path('uploads/user/'.$file_name));
 
-        ]);
-        return back()->with('photo_update', 'Photo Updated successfully');
+            User::find(Auth::id())->update([
+                'photo'=>$file_name,
+
+            ]);
+            return back()->with('photo_update', 'Photo Updated successfully');
+        } else {
+            $current_photo = public_path('uploads/user/'.Auth::user()->photo);
+            unlink($current_photo);
+
+            $photo = $request->photo;
+            $extension = $photo->extension();
+            // echo $extension;
+            $file_name = Auth::id().'.'.$extension;
+            // echo $file_name;
+
+            $image = Image::make($photo)->resize(300, 200)->save(public_path('uploads/user/'.$file_name));
+
+            User::find(Auth::id())->update([
+                'photo'=>$file_name,
+
+            ]);
+            return back()->with('photo_update', 'Photo Updated successfully');
+        }
+
+
     }
 }

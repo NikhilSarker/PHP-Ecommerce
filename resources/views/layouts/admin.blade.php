@@ -13,6 +13,12 @@
 	<link href="{{asset('backend')}}/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="{{asset('backend')}}/css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        .card{
+            height: auto!important;
+        }
+    </style>
 </head>
 <body>
 
@@ -233,7 +239,14 @@
 							</li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                                    @if (Auth::user()->photo == null)
+                                    <img src="{{ Avatar::create(Auth::user()->name)->toBase64() }}" />
+
+                                    @else
                                     <img src="{{asset('uploads/user')}}/{{Auth::user()->photo}}" width="20" alt=""/>
+
+                                    @endif
+
 									<div class="header-info">
 										<span class="text-black"><strong>{{Auth::user()->name}}</strong></span>
 										<p class="fs-12 mb-0">Super Admin</p>
