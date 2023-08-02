@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -42,3 +43,11 @@ Route::post('/user/photo/update', [HomeController::class, 'user_photo_update'])-
 // User list
 Route::get('/user/list', [UserController::class, 'user_list'])->name('user.list');
 Route::get('/user/remove/{user_id}', [UserController::class, 'user_remove'])->name('user.remove');
+
+//category
+Route::get('/category', [CategoryController::class, 'category'])->name('category');
+Route::post('/category/store', [CategoryController::class, 'category_store'])->name('category.store');
+Route::get('/category/edit/{category_id}', [CategoryController::class, 'category_edit'])->name('category.edit');
+Route::post('/category/update', [CategoryController::class, 'category_update'])->name('category.update');
+Route::get('/category/soft/delete/{category_id}', [CategoryController::class, 'category_soft_delete'])->name('category.soft.delete');
+
