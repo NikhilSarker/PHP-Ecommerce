@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="col-lg-8">
+        <form action="{{route('delete.checked')}}" method="post">
+            @csrf
+
         <div class="card">
             <div class="card-header">
                 <h3>Category List</h3>
@@ -9,6 +12,12 @@
             <div class="card-body">
                 <table class="table table-bordered text-center">
                     <tr>
+                        <th>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="checkAll">
+                                <label class="custom-control-label" for="checkAll">Check All</label>
+                            </div>
+                        </th>
                         <th>SL</th>
                         <th>Category Name</th>
                         <th>Category Image</th>
@@ -16,7 +25,13 @@
                     </tr>
                     @foreach ($categories as $sl => $category )
                     <tr>
-                        <td>{{$sl+1}}</td>
+                        <td>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" name="category_id[]" value="{{$category->id}}" id="cat{{$category->id}}">
+                                <label class="custom-control-label" for="cat{{$category->id}}"></label>
+                            </div>
+                        </td>
+                        <td>{{$categories->firstitem()+ $sl}}</td>
                         <td>{{$category->category_name}}</td>
                         <td><img width="50px" src="{{asset('uploads/category')}}/{{$category->category_image}}" alt=""></td>
                         <td>
@@ -29,8 +44,11 @@
                     </tr>
                     @endforeach
                 </table>
+                {{$categories->links()}}
+                <button type="submit" class="btn btn-danger">Delete Checked</button>
             </div>
         </div>
+    </form>
     </div>
     <div class="col-lg-4">
         <div class="card">
@@ -72,4 +90,10 @@
 
 
 
-{{-- data-link="{{route('category.remove', $category->id)}}" --}}
+@section('footer_script')
+    <script>
+        $("#checkAll").click(function(){
+        $('input:checkbox').not(this).prop('checked', this.checked);
+        });
+    </script>
+@endsection

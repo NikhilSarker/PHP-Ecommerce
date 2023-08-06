@@ -10,7 +10,8 @@ use Intervention\Image\Facades\Image;
 class CategoryController extends Controller
 {
     function category(){
-        $categories = category::all();
+        $categories = category::Paginate(5);
+        // $categories = category::simplePaginate(5);
         return view('admin.category.category', [
             'categories' => $categories,
         ]);
@@ -21,10 +22,8 @@ class CategoryController extends Controller
         // print_r($request->all());
         $request->validate([
             'category_name'=> 'required | unique:categories',
-            'category_image'=> 'required',
-            'category_image'=> 'image',
-            'photo'=> 'file | max:512',
-            'photo'=> 'dimensions:min_width=50,min_height=50',
+            'category_image'=> 'required | image',
+            'photo'=> 'file | max:512 | dimensions:min_width=50,min_height=50',
         ]);
         $img = $request->category_image;
         $extension = $img->extension();
@@ -85,5 +84,47 @@ class CategoryController extends Controller
         Category::find($category_id)->delete();
         return back();
 
+    }
+
+
+    function category_trash(){
+        $trash_category = Category::onlyTrashed()->get();
+
+        return view('admin.category.trash',[
+            'trash_category' => $trash_category,
+        ]);
+    }
+
+    function category_restore($category_id){
+        Category::onlyTrashed()->find($category_id)->restore();
+        return back();
+    }
+
+    function category_hard_delete($category_id){
+        $category = Category::onlyTrashed()->find($category_id);
+        $image = public_path('uploads/category/'.$category-> category_image);
+        unlink($image);
+
+        Category::onlyTrashed()->find($category_id)->forceDelete();
+        return back();
+
+    }
+
+
+    function delete_checked(Request $request){
+        // print_r($request->category_id);
+        foreach ($request-> category_id as $category) {
+            Category::find($category)->delete();
+        }
+        return back();
+
+    }
+
+
+    function restore_checked(Request $request){
+        foreach ($request-> category_id as $category) {
+            Category::onlyTrashed()->find($category)->restore();
+        }
+        return back();
     }
 }
