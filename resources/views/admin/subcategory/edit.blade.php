@@ -7,10 +7,13 @@
                 <h3>Edit Subcategory</h3>
             </div>
             <div class="card-body">
-                @if (session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
+                @if (session('update'))
+                    <div class="alert alert-success">{{ session('update') }}</div>
                 @endif
-                <form action="{{ route('subcategory.store') }}" method="post" enctype="multipart/form-data">
+                @if (session('exists'))
+                    <div class="alert alert-danger">{{ session('exists') }}</div>
+                @endif
+                <form action="{{ route('subcategory.update', $subcategory->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <select name="category_name" class="form-control">
@@ -41,7 +44,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Edit Subcategory</button>
+                        <button type="submit" class="btn btn-primary">Update Subcategory</button>
                     </div>
                 </form>
             </div>

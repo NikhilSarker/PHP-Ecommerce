@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
+use App\Models\Subcategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -102,10 +103,14 @@ class CategoryController extends Controller
 
     function category_hard_delete($category_id){
         $category = Category::onlyTrashed()->find($category_id);
-        $image = public_path('uploads/category/'.$category-> category_image);
+        $image = public_path('uploads/category/'.$category->category_image);
         unlink($image);
 
         Category::onlyTrashed()->find($category_id)->forceDelete();
+        Subcategory::where('category_id', $category_id)->update([
+            'category_id'=>16,
+
+        ]);
         return back();
 
     }
@@ -115,6 +120,10 @@ class CategoryController extends Controller
         // print_r($request->category_id);
         foreach ($request-> category_id as $category) {
             Category::find($category)->delete();
+            Subcategory::where('category_id', $category)->update([
+                'category_id'=>16,
+
+            ]);
         }
         return back();
 

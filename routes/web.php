@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
@@ -63,3 +64,14 @@ Route::post('/restore/checked', [CategoryController::class, 'restore_checked'])-
 Route::get('/subcategory',[SubcategoryController::class, 'subcategory'])->name('subcategory');
 Route::post('/subcategory/store',[SubcategoryController::class, 'subcategory_store'])->name('subcategory.store');
 Route::get('/subcategory/edit/{id}',[SubcategoryController::class, 'subcategory_edit'])->name('subcategory.edit');
+Route::post('/subcategory/update/{id}',[SubcategoryController::class, 'subcategory_update'])->name('subcategory.update');
+Route::get('/subcategory/delete/{id}',[SubcategoryController::class, 'subcategory_delete'])->name('subcategory.delete');
+
+
+// Brand
+Route::get('/brand',[BrandController::class, 'brand'])->name('brand');
+Route::post('/brand/store',[BrandController::class, 'brand_store'])->name('brand.store');
+Route::get('/brand/edit/{id}',[BrandController::class, 'brand_edit'])->name('brand.edit');
+Route::post('/brand/update',[BrandController::class, 'brand_update'])->name('brand.update');
+Route::get('/brand/delete/{id}',[BrandController::class, 'brand_delete'])->name('brand.delete');
+

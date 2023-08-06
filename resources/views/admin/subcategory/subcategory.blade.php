@@ -6,7 +6,11 @@
         <div class="card-head">
             <h3>Subcategory List</h3>
         </div>
+
         <div class="card-body">
+            @if (session('deleted'))
+            <div class="alert alert-success">{{session('deleted')}}</div>
+            @endif
             <div class="row">
                 @foreach ($categories as $category )
 
@@ -33,7 +37,7 @@
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{route('subcategory.edit', $subcategory->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i>&nbsp;</a>
-                                            <a href=""  class="btn btn-danger shadow btn-xs sharp del_btn"><i
+                                            <a href="{{route('subcategory.delete', $subcategory->id)}}"  class="btn btn-danger shadow btn-xs sharp del_btn"><i
                                                     class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
@@ -58,6 +62,10 @@
         <div class="card-body">
             @if (session('success'))
                 <div class="alert alert-success">{{session('success')}}</div>
+
+                @endif
+            @if (session('exists'))
+                <div class="alert alert-danger">{{session('exists')}}</div>
 
                 @endif
             <form action="{{route('subcategory.store')}}" method="post" enctype="multipart/form-data">
