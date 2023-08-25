@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\category;
 use App\Models\Color;
+use App\Models\Inventory;
 use App\Models\Size;
+use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -63,5 +65,23 @@ class InventoryController extends Controller
 
         }
 
+        function inventory($id){
+            $product = Product::find($id);
+            $colors = Color::all();
+            return view('admin.product.inventory',[
+                'product'=>$product,
+                'colors'=>$colors,
+            ]);
+        }
 
+        function inventory_store(Request $request, $id){
+            Inventory::insert([
+                'product_id'=>$id,
+                'color_id'=>$request->color_id,
+                'size_id'=>$request->size_id,
+                'quantity'=>$request->quantity,
+                'created_at'=>Carbon::now(),
+            ]);
+            return back()->with('inventory_added', 'Inventory Added successfully!');
+        }
 }

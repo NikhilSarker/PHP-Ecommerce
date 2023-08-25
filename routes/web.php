@@ -84,6 +84,8 @@ Route::post('/product/store',[ProductController::class, 'product_store'])->name(
 Route::get('/product/list',[ProductController::class, 'product_list'])->name('product.list');
 Route::get('/product/delete/{id}',[ProductController::class, 'product_delete'])->name('product.delete');
 Route::get('/product/show/{id}',[ProductController::class, 'product_show'])->name('product.show');
+Route::get('/product/inventory/{id}',[InventoryController::class, 'inventory'])->name('inventory');
+Route::post('/inventory/store/{id}',[InventoryController::class, 'inventory_store'])->name('inventory.store');
 
 // Product variation
 Route::get('/variation',[InventoryController::class, 'variation'])->name('variation');

@@ -38,7 +38,7 @@
                     </td>
                     <td>
                         <div class="d-flex">
-                            <a title="Inventory" href="{{route('product.show', $product->id)}}" class="btn btn-success shadow btn-xs sharp del_btn "><i class="fa fa-archive"></i></a>&nbsp;&nbsp;
+                            <a title="Inventory" href="{{route('inventory', $product->id)}}" class="btn btn-success shadow btn-xs sharp del_btn "><i class="fa fa-archive"></i></a>&nbsp;&nbsp;
                             <a title="View" href="{{route('product.show', $product->id)}}" class="btn btn-info shadow btn-xs sharp del_btn"><i class="fa fa-eye"></i></a>&nbsp;&nbsp;
                             <a title="Delete" href="{{route('product.delete', $product->id)}}"  class="btn btn-danger shadow btn-xs sharp del_btn"><i class="fa fa-trash"></i></a>
                         </div>
