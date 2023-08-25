@@ -23,7 +23,13 @@ class HomeController extends Controller
             'email'=>'required | email:rfc,dns',
             // 'email'=>'email:rfc,dns',
 
-        ]);
+        ]
+        // This is for custom message.
+            // ,[
+            //     'name.required'=>'name need',
+            //     'email.required'=>'email need',
+            //  ]
+    );
 
      User::find(Auth::id())->update([
         'name'=>$request->name,

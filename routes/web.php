@@ -4,6 +4,8 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UserController;
@@ -75,3 +77,17 @@ Route::get('/brand/edit/{id}',[BrandController::class, 'brand_edit'])->name('bra
 Route::post('/brand/update',[BrandController::class, 'brand_update'])->name('brand.update');
 Route::get('/brand/delete/{id}',[BrandController::class, 'brand_delete'])->name('brand.delete');
 
+// Product
+Route::get('/product',[ProductController::class, 'product'])->name('product');
+Route::post('/getSubcategory',[ProductController::class, 'getSubcategory']);
+Route::post('/product/store',[ProductController::class, 'product_store'])->name('product.store');
+Route::get('/product/list',[ProductController::class, 'product_list'])->name('product.list');
+Route::get('/product/delete/{id}',[ProductController::class, 'product_delete'])->name('product.delete');
+Route::get('/product/show/{id}',[ProductController::class, 'product_show'])->name('product.show');
+
+// Product variation
+Route::get('/variation',[InventoryController::class, 'variation'])->name('variation');
+Route::post('/color/store',[InventoryController::class, 'color_store'])->name('color.store');
+Route::post('/size/store',[InventoryController::class, 'size_store'])->name('size.store');
+Route::get('/color/remove/{id}',[InventoryController::class, 'color_remove'])->name('color.remove');
+Route::get('/size/remove/{id}',[InventoryController::class, 'size_remove'])->name('size.remove');
