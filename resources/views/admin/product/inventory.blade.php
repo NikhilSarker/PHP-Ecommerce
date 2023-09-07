@@ -1,7 +1,37 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="col-lg-8"></div>
+<div class="col-lg-8">
+    <div class="card">
+        <div class="card-header">
+            <h3>Inventory of <strong>{{$product->product_name}}</strong> </h3>
+            <a href="{{route('product.list')}}" class="btn btn-primary"><i class="fa fa-list"></i> Product List</a>
+        </div>
+        <div class="card-body">
+            <table class="table table-covered">
+                <tr>
+                    <th>Color</th>
+                    <th>Size</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+                @foreach ($inventories as $inventory)
+                <tr>
+                    <td>{{$inventory->rel_to_color->color_name}}</td>
+                    <td>{{$inventory->rel_to_size->size_name}}</td>
+                    <td>{{$inventory->quantity}}</td>
+                    <td>
+                        <a title="Edit" href="" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i>&nbsp;</a>
+                        <a title="Delete" href=""  class="btn btn-danger shadow btn-xs sharp del_btn"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+                @endforeach
+
+            </table>
+        </div>
+    </div>
+
+</div>
 <div class="col-lg-4">
     <div class="card">
         <div class="card-header">

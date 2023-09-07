@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [FrontendController::class, 'index']);
+Route::get('/', [FrontendController::class, 'index'])->name('index');
 // Route::get('/about', [FrontendController::class, 'about']);
 // Route::get('/contact', [FrontendController::class, 'contact']);
 // Route::get('/', function () {

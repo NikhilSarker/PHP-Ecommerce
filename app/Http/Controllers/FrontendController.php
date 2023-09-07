@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
     function index(){
-        return view('welcome');
+        $categories = Category::all();
+        return view('frontend.index',[
+            'categories'=>$categories,
+        ]);
     }
-    function about(){
-        return view('about');
-    }
-    function contact(){
-        return view('contact');
-    }
+    // function about(){
+    //     return view('about');
+    // }
+    // function contact(){
+    //     return view('contact');
+    // }
 }
