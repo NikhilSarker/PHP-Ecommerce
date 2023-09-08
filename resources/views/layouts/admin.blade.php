@@ -23,8 +23,15 @@
         rel="stylesheet">
     {{-- font awesome link --}}
     <script src="https://kit.fontawesome.com/a2ccbbb96a.js" crossorigin="anonymous"></script>
+    {{-- Toggle switch --}}
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+
+
 
     <style>
+        .btn .active {
+            outline: 1px solid red !important;
+        }
         .card {
             height: auto !important;
         }
@@ -589,6 +596,9 @@
 
     <!-- Dashboard 1 -->
     <script src="{{ asset('backend') }}/js/dashboard/dashboard-1.js"></script>
+
+    {{-- Toggle switch --}}
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     {{-- Sweet Alert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

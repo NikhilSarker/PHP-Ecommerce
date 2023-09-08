@@ -93,3 +93,4 @@ Route::post('/color/store',[InventoryController::class, 'color_store'])->name('c
 Route::post('/size/store',[InventoryController::class, 'size_store'])->name('size.store');
 Route::get('/color/remove/{id}',[InventoryController::class, 'color_remove'])->name('color.remove');
 Route::get('/size/remove/{id}',[InventoryController::class, 'size_remove'])->name('size.remove');
+Route::post('/changeStatus',[ProductController::class, 'changeStatus']);

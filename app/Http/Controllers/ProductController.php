@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
 use App\Models\category;
+use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\ProductGallery;
 use App\Models\Subcategory;
@@ -98,6 +99,11 @@ class ProductController extends Controller
         }
         Product::find($id)->delete();
 
+
+        $inventories = Inventory::where('product_id', $id)->get();
+        foreach ($inventories as  $inventory) {
+            Inventory::find($inventory->id)->delete();
+        }
         return back()->with('success', 'Product deleted successfully!');
 
     }
@@ -112,5 +118,9 @@ class ProductController extends Controller
             ]);
         }
 
-
+        function changeStatus(Request $request){
+            Product::find($request->product_id)->update([
+                'status'=>$request->status,
+            ]);
+        }
 }
